@@ -1,0 +1,9 @@
+{
+  "name": "leaklens-early-access",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "LeakLens Early Access Landing",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.108.2"
+  }
+}

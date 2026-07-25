@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="hu">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LeakLens - Early Access</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+<section class="hero">
+
+<h1>
+LeakLens
+</h1>
+
+
+<h2>
+Találd meg, hol veszít pénzt a webshopod.
+</h2>
+
+
+<p>
+A LeakLens segít feltárni azokat a problémákat,
+amelyek miatt vásárlók és bevétel veszhet el
+a webshopodban.
+</p>
+
+
+<a href="#early" class="button">
+Early Access jelentkezés
+</a>
+
+
+</section>
+
+
+
+<section class="problem">
+
+
+<h2>
+Miért készül a LeakLens?
+</h2>
+
+
+<p>
+Sok webshop pénzt költ látogatók szerzésére,
+miközben apró problémák miatt vásárlók hagyhatják el
+az oldalt vásárlás nélkül.
+</p>
+
+
+<div class="cards">
+
+
+<div class="card">
+<h3>Konverziós problémák</h3>
+<p>
+Olyan akadályok keresése, amelyek ronthatják
+a vásárlási folyamatot.
+</p>
+</div>
+
+
+<div class="card">
+<h3>Felhasználói élmény</h3>
+<p>
+Problémák feltárása, amelyek bizonytalanságot
+okozhatnak a vásárlóknál.
+</p>
+</div>
+
+
+<div class="card">
+<h3>Webshop optimalizálás</h3>
+<p>
+Lehetőségek az oldal teljesítményének javítására.
+</p>
+</div>
+
+
+</div>
+
+</section>
+
+
+
+
+<section id="early" class="early">
+
+
+<h2>
+Első webshop-partnereket keresünk
+</h2>
+
+
+<p>
+Jelentkezz az Early Access programba,
+és próbáld ki elsőként a LeakLenst.
+</p>
+
+
+
+<input
+id="website"
+placeholder="https://sajatwebshop.hu"
+/>
+
+
+<button onclick="joinEarlyAccess()">
+Jelentkezem
+</button>
+
+
+
+<p id="message"></p>
+
+
+
+</section>
+
+
+
+<section class="info">
+
+
+<h2>
+Hogyan működik?
+</h2>
+
+
+<p>
+1. Megadod a webshopod URL címét.
+</p>
+
+
+<p>
+2. Felvesszük veled a kapcsolatot.
+</p>
+
+
+<p>
+3. Az első tesztelő webshopok visszajelzéseivel
+fejlesztjük tovább a LeakLenst.
+</p>
+
+
+</section>
+
+
+
+<footer>
+
+<p>
+© LeakLens - Early Access Program
+</p>
+
+</footer>
+
+
+</div>
+
+
+
+
+<script>
+
+
+async function joinEarlyAccess(){
+
+
+const website =
+document.getElementById("website").value.trim();
+
+
+const message =
+document.getElementById("message");
+
+
+
+if(!website){
+
+message.style.color="red";
+message.innerHTML=
+"Kérjük add meg a webshop URL címét.";
+
+return;
+
+}
+
+
+
+try{
+
+
+const response = await fetch(
+"/api/early-access",
+{
+
+method:"POST",
+
+headers:{
+"Content-Type":"application/json"
+},
+
+body:JSON.stringify({
+website
+})
+
+});
+
+
+const data =
+await response.json();
+
+
+
+if(!response.ok){
+
+message.style.color="red";
+message.innerHTML=data.error;
+
+return;
+
+}
+
+
+
+message.style.color="green";
+
+message.innerHTML=
+"Sikeres jelentkezés! Hamarosan felvesszük veled a kapcsolatot.";
+
+document.getElementById("website").value="";
+
+
+}
+
+
+catch(error){
+
+console.error(error);
+
+message.style.color="red";
+
+message.innerHTML=
+"Hiba történt. Próbáld újra később.";
+
+}
+
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>
